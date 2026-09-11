@@ -1,0 +1,223 @@
+/* General Styling */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1 { text-align: center; color: #333; }
+h2 {
+    border-bottom: 2px solid #005a9e;
+    padding-bottom: 5px;
+    color: #005a9e;
+    margin-top: 30px;
+}
+a { color: #005a9e; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Navbar Menu */
+.navbar {
+    width: 100%;
+    background-color: #005a9e;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.navbar a {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+}
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Page Content */
+body > h1,
+body > h2,
+body > table,
+body > .button-primary,
+.card > p {
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto 30px auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+th {
+    background-color: #005a9e;
+    color: white;
+    font-size: 14px;
+}
+tr:nth-child(even) { background-color: #f9f9f9; }
+tr:hover { background-color: #eee; }
+.no-data { font-style: italic; color: #888; }
+
+/* Forms & Cards */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.card h1, .card h2 {
+    margin-top: 0;
+    text-align: left;
+}
+.card label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.card input[type="text"],
+.card input[type="number"],
+.card select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.search-form {
+    display: flex;
+    gap: 10px;
+}
+.search-form input {
+    flex-grow: 1;
+}
+
+/* Buttons */
+.button-primary, button.button-primary {
+    background-color: #005a9e;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+.button-primary:hover, button.button-primary:hover {
+    background-color: #004a8e;
+    text-decoration: none;
+}
+.button-secondary, a.button-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+.button-danger, button.button-danger {
+    background-color: #c00;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.card form .button-primary,
+.card form .button-secondary {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+/* Player Actions */
+td.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+td.actions form {
+    margin: 0;
+}
+td.actions .button-secondary {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+td.actions .button-danger {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* === NEW STYLES FOR DB ACTIONS === */
+.navbar .db-actions {
+    margin-left: auto; /* Pushes to the right */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.navbar .db-actions span {
+    color: #ccc;
+    font-size: 14px;
+    font-weight: bold;
+}
+.navbar a.btn-db {
+    color: white;
+    background-color: #4a4a4a;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.navbar a.btn-db:hover {
+    background-color: #5a5a5a;
+    text-decoration: none;
+}
+/* Style for the Drop button */
+.navbar a.btn-db-drop {
+    background-color: #c00;
+}
+.navbar a.btn-db-drop:hover {
+    background-color: #a00;
+}
+/* Style for the Create button */
+.navbar a.btn-db-create {
+    background-color: #007bff;
+}
+.navbar a.btn-db-create:hover {
+    background-color: #0056b3;
+}
+/* Style for the Populate button */
+.navbar a.btn-db-populate {
+    background-color: #28a745;
+}
+.navbar a.btn-db-populate:hover {
+    background-color: #1e7e34;
+}
+
+/* Style for result page */
+.card .message {
+    font-size: 18px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-left: 5px solid #005a9e;
+}

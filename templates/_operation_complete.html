@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ operation }} Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home (Queries)</a>
+        <a href="/players">Manage Players</a>
+        
+        <div class="db-actions">
+            <span>DB Actions:</span>
+            <a href="/run_sql/drop" class="btn-db btn-db-drop" onclick="return confirm('Are you sure you want to DROP all tables?');">Drop Tables</a>
+            <a href="/run_sql/create" class="btn-db btn-db-create">Create Tables</a>
+            <a href="/run_sql/populate" class="btn-db btn-db-populate" onclick="return confirm('This will insert all dummy data. Are you sure?');">Populate Tables</a>
+        </div>
+    </div>
+
+    <h1>{{ operation }} Result</h1>
+    <div class="card">
+        <p class="message">{{ message }}</p>
+        <a href="/" class="button-primary">Go to Homepage</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>La Liga Database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home (Queries)</a>
+        <a href="/players">Manage Players</a>
+        
+        <div class="db-actions">
+            <span>DB Actions:</span>
+            <a href="/run_sql/drop" class="btn-db btn-db-drop" 
+               onclick="return confirm('Are you sure you want to DROP all tables? This will delete all data.');">Drop Tables</a>
+            <a href="/run_sql/create" class="btn-db btn-db-create">Create Tables</a>
+            <a href="/run_sql/populate" class="btn-db btn-db-populate" 
+               onclick="return confirm('This will insert all dummy data. Run this after Create Tables.');">Populate Tables</a>
+        </div>
+    </div>
+
+    <h1>La Liga Project (Query Dashboard)</h1>
+
+    <h2>League Standings & Win Percentage</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Losses</th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Points</th>
+                <th>Win %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results.win_percentage %}
+            <tr>
+                <td>{{ row['Rank'] }}</td>
+                <td>{{ row['Team_Name'] }}</td>
+                <td>{{ row['Matches_Played'] }}</td>
+                <td>{{ row['Wins'] }}</td>
+                <td>{{ row['Draws'] }}</td>
+                <td>{{ row['Losses'] }}</td>
+                <td>{{ row['Goals_For'] }}</td>
+                <td>{{ row['Goals_Against'] }}</td>
+                <td>{{ row['Goals_Difference'] }}</td>
+                <td>{{ row['Points'] }}</td>
+                <td>{{ row['Win_Percentage'] }}%</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="11" class="no-data">No data found. Try creating and populating the tables.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h2>Goalkeeper Stats (Avg. Goals Conceded)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Goalkeeper</th>
+                <th>Team</th>
+                <th>Matches Played</th>
+                <th>Avg. Goals Conceded</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results.avg_goals_conceded %}
+            <tr>
+                <td>{{ row['Goalkeeper_Name'] }}</td>
+                <td>{{ row['Team_Name'] }}</td>
+                <td>{{ row['Matches_Played_GK'] }}</td>
+                <td>{{ row['Avg_Goals_Conceded_Per_Match'] }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="no-data">No data found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Matches Hosted by Stadium</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Stadium</th>
+                <th>City</th>
+                <th>Total Matches Hosted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results.matches_hosted %}
+            <tr>
+                <td>{{ row['Stadium_Name'] }}</td>
+                <td>{{ row['City'] }}</td>
+                <td>{{ row['Total_Matches_Hosted'] }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="3" class="no-data">No data found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Players with More Assists than Goals</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Total Goals</th>
+                <th>Total Assists</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results.assists_vs_goals %}
+            <tr>
+                <td>{{ row['Player_Name'] }}</td>
+                <td>{{ row['Team_Name'] }}</td>
+                <td>{{ row['Total_Goals'] }}</td>
+                <td>{{ row['Total_Assists'] }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="no-data">No players found with more assists than goals.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Coaches (Spanish or German)</h2>
+    <table>
+        <thead>
+            <tr><th>Name</th><th>Nationality</th></tr>
+        </thead>
+        <tbody>
+            {% for row in results.coaches %}
+            <tr>
+                <td>{{ row['Name'] }}</td><td>{{ row['Nationality'] }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="2" class="no-data">No data found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

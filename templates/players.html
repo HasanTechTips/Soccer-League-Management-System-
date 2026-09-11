@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Players</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home (Queries)</a>
+        <a href="/players">Manage Players</a>
+        
+        <div class="db-actions">
+            <span>DB Actions:</span>
+            <a href="/run_sql/drop" class="btn-db btn-db-drop" 
+               onclick="return confirm('Are you sure you want to DROP all tables? This will delete all data.');">Drop Tables</a>
+            <a href="/run_sql/create" class="btn-db btn-db-create">Create Tables</a>
+            <a href="/run_sql/populate" class="btn-db btn-db-populate" 
+               onclick="return confirm('This will insert all dummy data. Run this after Create Tables.');">Populate Tables</a>
+        </div>
+    </div>
+
+    <h1>Manage Players</h1>
+    
+    <p>This page allows you to search, add, edit, and delete player records.</p>
+
+    <div class="card">
+        <h2>Search Players</h2>
+        <form action="/players" method="POST" class="search-form">
+            <input type="text" name="search" placeholder="Search by name, position, or team..." value="{{ search_term }}">
+            <button type="submit">Search</button>
+            <a href="/players" class="button-secondary">Clear</a>
+        </form>
+    </div>
+
+    <a href="/player/add" class="button-primary" style="margin-bottom: 20px; display: inline-block;">Add New Player</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Position</th>
+                <th>Nationality</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in players %}
+            <tr>
+                <td>{{ player['Name'] }}</td>
+                <td>{{ player['Team_Name'] }}</td>
+                <td>{{ player['Position'] }}</td>
+                <td>{{ player['Nationality'] }}</td>
+                <td class="actions">
+                    <a href="/player/edit/{{ player['PlayerID'] }}" class="button-secondary">Edit</a>
+                    
+                    <form action="/player/delete/{{ player['PlayerID'] }}" method="POST" onsubmit="return confirm('Are you sure? This will also delete their stats.');">
+                        <button type="submit" class="button-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No players found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
